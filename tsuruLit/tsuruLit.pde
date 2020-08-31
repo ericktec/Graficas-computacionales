@@ -13,13 +13,12 @@ void setup(){
 
 void draw(){
   
-  
-  
-  
- background(135, 235, 164);
+  background(135, 235, 164);
   stroke(0,0,0);
   noFill();
   angleY+=0.01f;
+   
+  
   //vidrio interior
   translate(500,200,-300);
   rotateY(angleY);
@@ -61,6 +60,7 @@ void draw(){
   endShape(CLOSE);
   
   
+  
   //cofre
   beginShape();
   vertex(80,205,5);
@@ -71,6 +71,8 @@ void draw(){
   vertex(80,205,200);
   endShape(CLOSE);
   
+  noFill();
+
   beginShape(LINES);
   //lineas sobre el cofre
   vertex(340,205,220);
@@ -288,12 +290,20 @@ void draw(){
   
   
   //** box para trasero
-  translate(45,0,-423);
+  translate(0,0,-423);
   noFill();
   //placa trasera
-  box(50, 30, 5);
+  box(40, 30, 5);
   //**
+  beginShape();
+  //Fractal
+  drawCircle(0,0,20);
+  endShape();
 }
+
+
+
+
 
 void keyPressed() {
   if (key == CODED) {
@@ -310,4 +320,16 @@ void keyPressed() {
     
   }
   
+}
+
+
+
+void drawCircle(float x, float y, float radius) {
+  ellipse(x, y, radius, radius);
+  if(radius > 8) {
+    drawCircle(x + radius/2, y, radius/2);
+    drawCircle(x - radius/2, y, radius/2);
+    drawCircle(x, y + radius/2, radius/2);
+    drawCircle(x, y - radius/2, radius/2);
+  }
 }
