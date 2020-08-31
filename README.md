@@ -2,6 +2,6 @@
 
 ## Proyecto de intento de tsuru/cybertruck
 
-![viewTsuru](https://raw.githubusercontent.com/ericktec/Graficas-computacionales/master/viewTsuru.PNG)
+![viewTsuru](https://raw.githubusercontent.com/ericktec/Graficas-computacionales/master/viewTsuru.PNG?token=AINLVIJA2RPRVHPDQBZMQIS7JRKJ4)
 
 
