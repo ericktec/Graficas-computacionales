@@ -1,78 +1,110 @@
 
-float angleY, move;
+float angleY, angleX, angleWheel;
+boolean acelerar = false;
+PImage carTexture, wheelTexture, neonTexture, bodyTexture, windowTexture, placaTexture, bg;
+PShape placaBox, baseBox, wheel;
 void settings(){
-  size(1200,480,P3D); 
+  size(1200,497,P3D); 
   
-  angleY=0;
-  move=0;
-  
+  angleY = 0;
+  angleX = 0;
+  angleWheel = 0;
 }
 void setup(){
+  rotateX(angleX*0.005f -200);
+  carTexture = loadImage("car.jpg");
+  neonTexture = loadImage("neon.jpg");
+  bodyTexture = loadImage("body.jpg");
+  placaTexture = loadImage("placa.jpg");
+  windowTexture = loadImage("window.jpg");
+  wheelTexture = loadImage("wheel.jpg");
+  bg = loadImage("fondo.jpg");
   
+  baseBox = createShape(BOX, 350, 40, 845);
+  placaBox = createShape(BOX, 40, 30, 5);
+  wheel = createShape(SPHERE, 60);
+  
+  baseBox.setTexture(carTexture);
+  placaBox.setTexture(placaTexture);
+  wheel.setTexture(wheelTexture);
+  
+  baseBox.setStroke(false);
+  placaBox.setStroke(false);
+  wheel.setStroke(false);
+  textureMode(NORMAL);
 }
 
 void draw(){
   
-  background(135, 235, 164);
-  stroke(0,0,0);
+  //background(135, 235, 164);
+  background(bg);
+  
   noFill();
-  angleY+=0.01f;
+  stroke(0,0,0);
+  //angleY+=0.01f;
    
   
   //vidrio interior
-  translate(500,200,-300);
+  //translate(500,200,-300);
+  translate(width/2,height/2,-300);
+  rotateX(angleX);
   rotateY(angleY);
-  rotateX(-mouseY*0.005f -200);
+  
   translate(-300,-150,200);
   beginShape();
-  vertex(100,100,-40);
-  vertex(400,100,-40);
-  vertex(410,200,5);
-  vertex(90,200,5);
+    texture(windowTexture);
+    vertex(100,100,-40,0,0);
+    vertex(400,100,-40,1,0);
+    vertex(410,200,5,1,1);
+    vertex(90,200,5,0,1);
   endShape(CLOSE);
   
   //vidrio laterales
   beginShape();
   //esquina del vidrio
-  vertex(95,100,-40);
-  vertex(405,100,-40);
-  vertex(415,200,5);
-  vertex(85,200,5);
+    texture(windowTexture);
+    vertex(95,100,-40,0,0);
+    vertex(405,100,-40,1,0);
+    vertex(415,200,5,1,1);
+    vertex(85,200,5,0,1);
   endShape(CLOSE);
   
   beginShape();
-  vertex(90,95,-40);
-  vertex(410,95,-40);
-  vertex(420,205,5);
-  vertex(80,205,5);
+    texture(windowTexture);
+    vertex(90,95,-40,0,0);
+    vertex(410,95,-40,1,0);
+    vertex(420,205,5,1,1);
+    vertex(80,205,5,0,1);
   endShape(CLOSE);
   
   //parabrisas completo
   beginShape();
+    texture(windowTexture);
   //esquina superior izquierda
-  vertex(90,95,-40);
+  vertex(90,95,-40,0,0);
   //esquina superior derecha
-  vertex(410,95,-40);
+  vertex(410,95,-40,1,0);
   //esquina inferior derecha
-  vertex(420,205,5);
+  vertex(420,205,5,1,1);
   //esquina inferior izquierda
-  vertex(80,205,5);
+  vertex(80,205,5,0,1);
   endShape(CLOSE);
   
   
-  
+  noStroke();
   //cofre
   beginShape();
-  vertex(80,205,5);
-  vertex(420,205,5);
-  vertex(420,205,200);
-  vertex(340,205,220);
-  vertex(160,205,220);
-  vertex(80,205,200);
+    texture(bodyTexture);
+    vertex(80,205,5,0,0);
+    vertex(420,205,5,0,0);
+    vertex(420,205,200,1,0);
+    vertex(340,205,220,1,1);
+    vertex(160,205,220,0,1);
+    vertex(80,205,200,0,1);
   endShape(CLOSE);
   
   noFill();
-
+  stroke(0,0,0);
   beginShape(LINES);
   //lineas sobre el cofre
   vertex(340,205,220);
@@ -182,101 +214,107 @@ void draw(){
   vertex(70,245,5);
   //
   endShape(CLOSE);
-  
+  noStroke();
  //techo frontal
   beginShape();
-  vertex(90,95,-40);
-  vertex(410,95,-40);
-  vertex(410,95,-140);
-  vertex(90,95,-140);
+    texture(bodyTexture);
+    vertex(90,95,-40,0,0);
+    vertex(410,95,-40,1,0);
+    vertex(410,95,-140,1,1);
+    vertex(90,95,-140,0,1);
   endShape(CLOSE);
   
   //techo trasero
   beginShape();
-  vertex(410,95,-140);
-  vertex(90,95,-140);
-  vertex(90,205,-640);
-  vertex(410,205,-640);
+    texture(bodyTexture);
+    vertex(410,95,-140,0,0);
+    vertex(90,95,-140,1,0);
+    vertex(90,205,-640,1,1);
+    vertex(410,205,-640,0,1);
   endShape(CLOSE);
   
   //lateral izq
   beginShape();
-  vertex(410,95,-40);
-  vertex(410,95,-140);
-  vertex(410,205,-640);
-  vertex(420,205,5);
+    texture(bodyTexture);
+    vertex(410,95,-40,0,0);
+    vertex(410,95,-140,1,0);
+    vertex(410,205,-640,1,1);
+    vertex(420,205,5,0,1);
   endShape(CLOSE);
   
   
   //barra lateral izq 
   beginShape();
- vertex(420,205,5);
- vertex(410,205,-640);
- vertex(420,215,-640);
- vertex(430,215,5);
+   texture(bodyTexture);
+   vertex(420,205,5,0,0);
+   vertex(410,205,-640,1,0);
+   vertex(420,215,-640,1,1);
+   vertex(430,215,5,0,1);
   endShape(CLOSE);
   
   //lateral izq inferior
   beginShape();
- vertex(420,215,-640);
- vertex(430,215,5);
- vertex(430,245,5);
- vertex(420,245,-640);
+   texture(bodyTexture);
+   vertex(420,215,-640,0,0);
+   vertex(430,215,5,1,0);
+   vertex(430,245,5,1,1);
+   vertex(420,245,-640,0,1);
   endShape(CLOSE);
   
   //lateral izq inferior inferior
   beginShape();
- vertex(430,245,5);
- vertex(420,245,-640);
- vertex(420,265,-640);
- vertex(430,265,5);
+   texture(neonTexture);
+   vertex(430,245,5,0,0);
+   vertex(420,245,-640,1,0);
+   vertex(420,265,-640,1,1);
+   vertex(430,265,5,0,1);
   endShape(CLOSE);
   
   //lateral derecho
   beginShape();
-  vertex(90,95,-40);
-  vertex(90,95,-140);
-  vertex(90,205,-640);
-  vertex(80,205,5);
+    texture(bodyTexture);
+    vertex(90,95,-40,0,0);
+    vertex(90,95,-140,1,0);
+    vertex(90,205,-640,1,1);
+    vertex(80,205,5,0,1);
   endShape(CLOSE);
   
   //barra lateral derecha
   beginShape();
-  vertex(90,205,-640);
-  vertex(80,205,5);
-  vertex(70,215,5);
-   vertex(70,215,-640);
+    texture(bodyTexture);
+    vertex(90,205,-640,0,0);
+    vertex(80,205,5,1,0);
+    vertex(70,215,5,1,1);
+    vertex(70,215,-640,0,1);
   endShape(CLOSE);
   
   
  //lateral derecha inferior
  beginShape();
- vertex(70,215,5);
- vertex(70,245,5);
- vertex(70,245,-640);
- vertex(70,215,-640);
+   texture(bodyTexture);
+   vertex(70,215,5,0,0);
+   vertex(70,245,5,1,0);
+   vertex(70,245,-640,1,1);
+   vertex(70,215,-640,0,1);
  endShape(CLOSE);
  
   //lateral derecha inferior inferior
  beginShape();
- 
- vertex(70,245,5);
- vertex(70,245,-640);
- vertex(70,265,-640);
- vertex(70,265,5);
- 
+   texture(neonTexture);
+   vertex(70,245,5,0,0);
+   vertex(70,245,-640,1,0);
+   vertex(70,265,-640,1,1);
+   vertex(70,265,5,1,0);
  endShape(CLOSE);
   
   
   //trasero
  beginShape();
- 
-
- vertex(70,245,-640);
- vertex(420,245,-640);
- vertex(420,265,-640);
- vertex(70,265,-640);
- 
+   texture(neonTexture);
+   vertex(70,245,-640,0,0);
+   vertex(420,245,-640, 1, 0);
+   vertex(420,265,-640, 1, 1);
+   vertex(70,265,-640, 0, 1);
  endShape(CLOSE);
  
  
@@ -285,7 +323,7 @@ void draw(){
  translate(245,285,-217);
   noFill();
   //base del tsuru tuneado +100 papu lince
-  box(350, 40, 845);
+  shape(baseBox);
   //--
   
   
@@ -293,15 +331,51 @@ void draw(){
   translate(0,0,-423);
   noFill();
   //placa trasera
-  box(40, 30, 5);
+  shape(placaBox);
   //**
   beginShape();
   //Fractal
   drawCircle(0,0,20);
   endShape();
+  
+  //  LLANTAS
+  translate(0, 20, 0);
+  pushMatrix();
+    translate(170, 40, 200);
+    rotateX(90.0f);
+    rotateZ(90.0f);
+    rotateY(angleWheel);
+    shape(wheel);
+  popMatrix();
+  
+  pushMatrix();
+    translate(-170, 40, 200);
+    rotateX(90.0f);
+    rotateZ(90.0f);
+    rotateY(angleWheel);
+    shape(wheel);
+  popMatrix();
+  
+  pushMatrix();
+    translate(170, 40, 700);
+    rotateX(90.0f);
+    rotateZ(90.0f);
+    rotateY(angleWheel);
+    shape(wheel);
+  popMatrix();
+  
+  pushMatrix();
+    translate(-170, 40, 700);
+    rotateX(90.0f);
+    rotateZ(90.0f);
+    rotateY(angleWheel);
+    shape(wheel);
+  popMatrix();
+  
+  if(acelerar){
+    angleWheel+=0.05;  
+  }
 }
-
-
 
 
 
@@ -312,12 +386,10 @@ void keyPressed() {
     } else if (keyCode == LEFT) {
       angleY-=0.05f;
     }else if(keyCode == UP){
-      move+=1;
+      angleX+=0.05f;
     }else if(keyCode == DOWN){
-      move-=1;
+      angleX-=0.05f;
     }
-  } else {
-    
   }
   
 }
@@ -326,10 +398,19 @@ void keyPressed() {
 
 void drawCircle(float x, float y, float radius) {
   ellipse(x, y, radius, radius);
+  fill(#3325E3);
   if(radius > 8) {
     drawCircle(x + radius/2, y, radius/2);
     drawCircle(x - radius/2, y, radius/2);
     drawCircle(x, y + radius/2, radius/2);
     drawCircle(x, y - radius/2, radius/2);
+  }
+}
+
+void mouseClicked() {
+  if(mouseX <= height/2){
+      acelerar = true;
+  } else if(mouseX  > height/2){
+      acelerar = false;
   }
 }
