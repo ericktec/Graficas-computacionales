@@ -37,10 +37,10 @@ void setup(){
   wheel.setStroke(false);
   textureMode(NORMAL);
   
-  
   spin=false;
   rotateVar=0;
   rightRotate=0.03f;
+  
 }
 
 void draw(){
@@ -155,28 +155,28 @@ void draw(){
   //faro derecho lateral
    beginShape();
    texture(bodyTexture);
-   vertex(420,205,200);
-   vertex(420,245,200);
-   vertex(430,245,200);
-    vertex(430,215,200);
+   vertex(420,205,200,0,0);
+   vertex(420,245,200,1,0);
+   vertex(430,245,200,1,1);
+    vertex(430,215,200,0,1);
   endShape(CLOSE);
   
   //barra derecha lateral superior
    beginShape();
    texture(bodyTexture);
-   vertex(420,205,200);
-    vertex(430,215,200);
-    vertex(430,215,5);
-    vertex(420,205,5);
+   vertex(420,205,200,0,0);
+    vertex(430,215,200,1,0);
+    vertex(430,215,5,1,1);
+    vertex(420,205,5,0,1);
   endShape(CLOSE);
   
   //barra derecha lateral inferior
    beginShape();
    texture(bodyTexture);
-    vertex(430,215,200);
-    vertex(430,215,5);
-   vertex(430,245,5);
-   vertex(430,245,200);
+     vertex(430,215,200,0,0);
+     vertex(430,215,5,1,0);
+     vertex(430,245,5,1,1);
+     vertex(430,245,200,0,1);
   endShape(CLOSE);
   
    //faro izquierdo
@@ -192,93 +192,88 @@ void draw(){
    beginShape();
    texture(bodyTexture);
    vertex(80,205,200,0,0);
-   vertex(80,245,200);
-   vertex(70,245,200);
-   vertex(70,215,200);
+   vertex(80,245,200,1,0);
+   vertex(70,245,200,1,1);
+   vertex(70,215,200,0,1);
   endShape(CLOSE);
   
    //barra izquierda lateral superior
    beginShape();
    texture(bodyTexture);
-   vertex(80,205,200);
-   vertex(70,215,200);
-   vertex(70,215,5);
-   vertex(80,205,5);
+   vertex(80,205,200,0,0);
+   vertex(70,215,200,1,0);
+   vertex(70,215,5,1,1);
+   vertex(80,205,5,0,1);
   endShape(CLOSE);
   
   
   //barra izquierda lateral inferior
    beginShape();
    texture(bodyTexture);
-   vertex(70,215,200);
-   vertex(70,215,5);
-   vertex(70,245,5);
-   vertex(70,245,200);
+   vertex(70,215,200,0,0);
+   vertex(70,215,5,1,0);
+   vertex(70,245,5,1,1);
+   vertex(70,245,200,0,1);
   endShape(CLOSE);
   
   //defensa techo
   beginShape();
    texture(bodyTexture);
-   vertex(70,245,200);
-   vertex(430,245,200);
-   vertex(430,245,230);
-   vertex(70,245,230);
+   vertex(70,245,200,0,0);
+   vertex(430,245,200,1,0);
+   vertex(430,245,230,1,1);
+   vertex(70,245,230,0,1);
   endShape(CLOSE);
   
   //defensa frente
   beginShape();
    texture(bodyTexture);
-   vertex(430,245,230);
-   vertex(70,245,230);
-    vertex(70,265,230);
-    vertex(430,265,230);
+   vertex(430,245,230,0,0);
+   vertex(70,245,230,1,0);
+   vertex(70,265,230,1,1);
+   vertex(430,265,230,0,1);
   endShape(CLOSE);
   
   
   //defensa izquierda
   beginShape();
    texture(bodyTexture);
-   vertex(70,245,230);
-    vertex(70,265,230);
-   vertex(70,265,5);
-   vertex(70,245,5);
+   vertex(70,245,230,0,0);
+   vertex(70,265,230,1,0);
+   vertex(70,265,5,1,1);
+   vertex(70,245,5,0,1);
   endShape(CLOSE);
   
   //defensa derecha
   beginShape();
    texture(bodyTexture);
-   vertex(430,245,230);
-    vertex(430,265,230);
-   vertex(430,265,5);
-   vertex(430,245,5);
+   vertex(430,245,230,0,0);
+   vertex(430,265,230,1,0);
+   vertex(430,265,5,1,1);
+   vertex(430,245,5,0,1);
   endShape(CLOSE);
   
   
    //defensa superior trasera
   beginShape();
    texture(bodyTexture);
-   vertex(70,245,-640);
-   vertex(420,245,-640);
-   vertex(420,215,-640);
-   vertex(70,215,-640);
+   vertex(70,245,-640,0,0);
+   vertex(420,245,-640,1,0);
+   vertex(420,215,-640,1,1);
+   vertex(70,215,-640,0,1);
   endShape(CLOSE);
   
   
    //defensa superior trasera vidrio
   beginShape();
    texture(bodyTexture);
-   vertex(420,215,-640);
-   vertex(70,215,-640);
-   
-   vertex(90,205,-640);
-    vertex(410,205,-640);
+   vertex(420,215,-640,0,0);
+   vertex(70,215,-640,1,0); 
+   vertex(90,205,-640,1,1);
+   vertex(410,205,-640,0,1);
   endShape(CLOSE);
   
    
-   
-  
-  
-  
   //------
   
  //techo frontal
