@@ -116,11 +116,12 @@ void draw(){
     vertex(80,205,200,0,1);
   endShape(CLOSE);
   
+  //Calcomania cofre
   pushMatrix();
   stroke(0);
-  translate(250,200,100);
+  translate(200,200,160);
   rotateX(radians(90));
-  drawCircle(0,0,80, 255);
+  calculateTrianglePoints(0,0,50,-100,100,0, 4);
   popMatrix();
   
   noFill();
@@ -483,6 +484,29 @@ void drawCircle(float x, float y, float radius, color strokeColor) {
     drawCircle(x, y + radius/2, radius/2, strokeColor);
     drawCircle(x, y - radius/2, radius/2, strokeColor);
   }
+}
+
+
+
+void calculateTrianglePoints(float x1, float y1, float x2, float y2, float x3, float y3, int limit){
+  if(limit>0){
+    float leftX = (x1+x2)/2;
+    float leftY = (y1+y2)/2;
+    float rightX = (x2+x3)/2;
+    float rightY = (y2+y3)/2;
+    float middleX = (x3+x1)/2;
+    float middleY = (y3+y1)/2;
+    //Arriba
+    calculateTrianglePoints(leftX, leftY, x2, y2, rightX, rightY, limit-1);
+    //Izquierda
+    calculateTrianglePoints(x1, y1, leftX, leftY, middleX, middleY, limit-1);
+    //Derecha
+    calculateTrianglePoints(middleX, middleY, rightX, rightY, x3, y3, limit-1);
+  }else{
+     triangle(x1, y1, x2, y2, x3, y3);
+  }
+  
+  
 }
 
 
