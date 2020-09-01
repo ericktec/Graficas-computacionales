@@ -47,11 +47,7 @@ void draw(){
   
   //background(135, 235, 164);
   background(bg);
-  pushMatrix();
-  stroke(#894264);
-  translate(525,250,-700);
-  drawCircle(0,0,500);
-  popMatrix();
+  
   
   noFill();
   stroke(0,0,0);
@@ -120,6 +116,13 @@ void draw(){
     vertex(80,205,200,0,1);
   endShape(CLOSE);
   
+  pushMatrix();
+  stroke(0);
+  translate(250,200,100);
+  rotateX(radians(90));
+  drawCircle(0,0,80, 255);
+  popMatrix();
+  
   noFill();
   stroke(0,0,0);
   beginShape(LINES);
@@ -142,6 +145,14 @@ void draw(){
    vertex(340,245,220,1,1);
    vertex(160,245,220,0,1);
   endShape(CLOSE);
+  
+  pushMatrix();
+  stroke(255);
+  translate(250,290,210);
+  drawCircle(0,0,20, 0);
+  popMatrix();
+  
+  
   
   //faro derecho
    beginShape();
@@ -395,7 +406,6 @@ void draw(){
   shape(placaBox);
   //**
   beginShape();
-  //Fractal
   endShape();
   
   //  LLANTAS
@@ -464,16 +474,18 @@ void keyPressed() {
 
 
 
-void drawCircle(float x, float y, float radius) {
-  ellipse(x, y, radius, radius);
-  fill(#3325E3);
+void drawCircle(float x, float y, float radius, color strokeColor) {
+  circle(x, y, radius);
+  fill(strokeColor);
   if(radius > 8) {
-    drawCircle(x + radius/2, y, radius/2);
-    drawCircle(x - radius/2, y, radius/2);
-    drawCircle(x, y + radius/2, radius/2);
-    drawCircle(x, y - radius/2, radius/2);
+    drawCircle(x + radius/2, y, radius/2, strokeColor);
+    drawCircle(x - radius/2, y, radius/2, strokeColor);
+    drawCircle(x, y + radius/2, radius/2, strokeColor);
+    drawCircle(x, y - radius/2, radius/2, strokeColor);
   }
 }
+
+
 
 void mouseClicked() {
   spin=!spin;
