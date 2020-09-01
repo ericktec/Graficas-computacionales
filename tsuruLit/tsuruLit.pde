@@ -38,6 +38,11 @@ void draw(){
   
   //background(135, 235, 164);
   background(bg);
+  pushMatrix();
+  stroke(#894264);
+  translate(525,250,-700);
+  drawCircle(0,0,500);
+  popMatrix();
   
   noFill();
   stroke(0,0,0);
@@ -335,7 +340,6 @@ void draw(){
   //**
   beginShape();
   //Fractal
-  drawCircle(0,0,20);
   endShape();
   
   //  LLANTAS
